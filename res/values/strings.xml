@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">KnAdbPushEx</string>
+	<string name="app_ver">1.00</string>
+	<string name="app_message">
+		USBストレージのマウント/アンマウント・PC側での切断処理が面倒くさい人向けです。&lt;br>
+		adb pushを使ってPCからAndroid端末に日本語名のファイルを転送できるようにする補助アプリです。&lt;br>
+		操作は単純になりますが大きいファイルだとadb pushでは進捗がわからないのが難点です。&lt;br>
+		※PCでadbコマンドが&lt;u>使える状態&lt;/u>になっていることと、操作する方は&lt;u>ある程度以上の知識&lt;/u>がある方を前提としています。&lt;br>
+		&lt;br>
+		全ての操作はPCから以下の手順で行います&lt;br>
+		&lt;br>
+		1.ファイル名を一時的に英数(file+連番)にして送る&lt;br>
+		&lt;br>
+		2.一時ファイル名と本来のファイル名を結びつけるリストと送り先ディレクトリを記述した「ファイル名変換リスト」を送る&lt;br>
+		&lt;br>
+		ここまでAndroid側で同じ一時ディレクトリに入れる&lt;br>
+		&lt;br>
+		3.adb shell am
+		broadcast -a
+		jp.ind.knhnnh.adbpushex.KICK_MOVE -d
+		file:///sdcard/temp/temp_list.txt&lt;br>
+		※2のファイル名変換リストを/sdcard/temp/temp_list.txtに送った場合&lt;br>
+		&lt;br>
+		4.3のbroadcastでこのアプリが発動してファイル名変換リストに従って移動と名前が変更される&lt;br>
+		&lt;br>
+		という手順になっています。&lt;br>
+		ここまでの一連の手順を自動的に行うBATファイルは
+		https://github.com/knhnnh/adbpushex に用意してありますのでご利用ください。&lt;br>
+		&lt;br>
+		ファイル名変換リストのフォーマット&lt;br>
+		例:&lt;br>&lt;i>&lt;blockquote>
+		Shift-JIS&lt;br>
+		dest /sdcard/download/&lt;br>
+		file1 サンプル.txt&lt;br>
+		file2
+		動画ファイル.mp4&lt;br>
+		&lt;/i>&lt;/blockquote>
+		1行目:&lt;br>
+		変換リストファイルのエンコード&lt;br>
+		Shift-JISやUTF-8など&lt;br>
+		&lt;br>
+		2行目:&lt;br>
+		送り先ディレクトリをdestと空白のあとに記述&lt;br>
+		&lt;br>
+		3行目以降:&lt;br>
+		一時ファイル名と本来のファイル名の対応リスト&lt;br>
+		一時ファイル名の最初は"file"で始まる必要があり、空白で区切って記述します。
+	</string>
+
+	<string name="message_notexist_listdir">一時ディレクトリ %s がありません</string>
+	<string name="message_notexist_listfile">変換リストファイル %s がありません</string>
+	<string name="message_notexist_destdir">コピー先ディレクトリ %s がありません</string>
+	<string name="message_notexist_srcFile">%2$s の一時ファイル %1$s がありません</string>
+	<string name="message_delete_err_destFile">既存のコピー先ファイル %s の削除に失敗しました</string>
+	<string name="message_move_err">一時ファイル %1$s から %2$s への移動に失敗しました</string>
+</resources>
